@@ -7,7 +7,8 @@ const config = {
     db_server: "127.0.0.1:27017",
     db_name: "Panus",
 
-    frontend_public_path: "/"
+    frontend_public_path: "/",
+    frontend_sources_folder: "src"
 }
 
 const buildFinalConfig = () => {
