@@ -24,5 +24,7 @@ function loadDevMiddleware() {
 }
 
 function loadProdMiddleware() {
+    const compression = require("compression");
 
+    router.use(compression());
 }

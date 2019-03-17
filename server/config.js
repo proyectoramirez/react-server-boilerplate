@@ -5,7 +5,9 @@ const config = {
     port: "3000",
     
     db_server: "127.0.0.1:27017",
-    db_name: "Panus"
+    db_name: "Panus",
+
+    frontend_public_path: "/"
 }
 
 const buildFinalConfig = () => {
