@@ -6,7 +6,7 @@ module.exports = {
           modules: false,
         },
       ],
-      //'@babel/preset-react',
+      '@babel/preset-react',
     ],
     /* plugins: [
       'styled-components',
