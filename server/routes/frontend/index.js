@@ -2,7 +2,6 @@ const express = require("express");
 const isDev = require("../../utils/isDev");
 const devSetup = require("./devSetup");
 const prodSetup = require("./prodSetup");
-const config = require("../../config");
 
 const router = express.Router();
 

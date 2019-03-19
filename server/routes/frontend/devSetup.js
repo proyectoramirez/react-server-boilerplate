@@ -7,7 +7,7 @@ const webpackConfig = require("./webpackConfig/webpack.dev.babel");
 const compiler = webpack(webpackConfig);
 const middleware = webpackDevMiddleware(compiler, {
     logLevel: 'warn',
-    publicPath: webpackConfig.output.publicPath,
+    publicPath: "/",
     silent: true,
     stats: 'errors-only',
 });
