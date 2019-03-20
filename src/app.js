@@ -1,12 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { Helmet } from 'react-helmet';
+import Routes from "./routes";
+import GlobalStyle from "./globalStyles";
 
-const MOUNT_NODE = document.getElementById("app");
-
-ReactDOM.render(
-    <div>
-        <h1>HELLO BUDDIES</h1>
-        <button>HOLI</button>
-    </div>,
-    MOUNT_NODE
-);
+export default function App() {
+    return (
+        <>
+            <Helmet
+                titleTemplate="%s - React.js Boilerplate"
+                defaultTitle="Works"
+            >
+                <meta name="description" content="A React.js Boilerplate application" />
+            </Helmet>
+            <Routes />
+            <GlobalStyle />
+        </>
+    );
+}
