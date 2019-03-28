@@ -34,28 +34,20 @@ cleanRepo(() => {
  * Deletes the .git folder in dir only if cloned from our repo
  */
 function cleanRepo(callback) {
-    fs.readFile('.git/config', 'utf8', (err, data) => {
+    fs.access(".git/", fs.constants.F_OK, (err) => {
         if (!err) {
-            const isClonedRepo =
-                typeof data === 'string' &&
-                (data.match(/url\s*=/g) || []).length === 1 &&
-                ORIGIN_REGEX.test(data);
-            if (isClonedRepo) {
-                process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
-                process.stdin.resume();
-                process.stdin.on('data', pData => {
-                    const val = pData.toString().trim();
-                    if (val === 'y' || val === 'Y' || val === '') {
-                        process.stdout.write('Removing old repository');
-                        shell.rm('-rf', '.git/');
-                        addCheckMark(callback);
-                    } else {
-                        dontClearRepo('', callback);
-                    }
-                });
-            } else {
-                dontClearRepo('\n', callback);
-            }
+            process.stdout.write('\nDo you want to clear old repository? [Y/n] ');
+            process.stdin.resume();
+            process.stdin.on('data', pData => {
+                const val = pData.toString().trim();
+                if (val === 'y' || val === 'Y' || val === '') {
+                    process.stdout.write('Removing old repository');
+                    shell.rm('-rf', '.git/');
+                    addCheckMark(callback);
+                } else {
+                    dontClearRepo('', callback);
+                }
+            });
         } else {
             callback();
         }
