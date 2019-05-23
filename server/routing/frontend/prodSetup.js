@@ -2,12 +2,14 @@ const express = require("express");
 const { resolve } = require("path");
 const config = require("../../config");
 
-module.exports = (router) => {
-    const outputPath = config.outputPath;
+module.exports = () => {
+    const router = express.Router();
 
     router.use(express.static(outputPath));
 
     router.get("*", (req, res) => {
-        res.sendFile(resolve(outputPath, "index.html"));
+        res.sendFile(resolve(config.outputPath, "index.html"));
     });
+
+    return router;
 }

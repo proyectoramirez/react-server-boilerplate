@@ -1,23 +1,26 @@
+//Sets up require aliases
+require('module-alias/register');
+
 const express = require("express");
-const logger = require("./utils/logger");
 const config = require("./config");
-const db = require("./database");
+const setupDB = require("./database");
 const middleware = require("./middleware");
-const routes = require("./routes");
+const routing = require("./routing");
+const logger = require("./utils/logger");
 
 const app = express();
 
 app.use(middleware);
-app.use(routes);
+app.use(routing);
 
-db.createConnection().then(startApp);
+setupDB().catch(() => {}).finally(startServer);
 
-function startApp() {
+function startServer() {
     const host = config.host;
     const port = config.port;
 
     // Start your app.
-    app.listen(port, host, async err => {
+    app.listen(port, host, err => {
         if (err) {
             return logger.error(err);
         }

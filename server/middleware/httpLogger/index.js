@@ -1,16 +1,17 @@
-const logger = require("../utils/logger");
+const logger = require("@/utils/logger");
+const { isDev } = require("@/utils/env");
 
 
 const logRequest = (req) => {
-    logger.info(`${req.method} request to ${req.originalUrl} by ${req.ip}`);
+    logger.info(`${req.method} to ${req.originalUrl} by ${req.ip}`);
 }
 
 const logResponse = (res) => {
     if (res.finished) {
         logger.info(`${res.statusCode} ${res.statusMessage}, ${res.get('Content-Length') || 0}b sent`);
     } else {
-        logger.info(`Request aborted by the client.`);
-        logger.info(`Response had status ${res.statusCode} ${res.statusMessage}, ${res.get('Content-Length') || 0}b`);
+        logger.info(`Aborted by the client.`);
+        logger.info(`Had status ${res.statusCode} ${res.statusMessage}, ${res.get('Content-Length') || 0}b`);
     }
 }
 
@@ -25,18 +26,18 @@ const middleware = (callback) => {
             res.off("close", runCallback);
             res.off("error", runCallback);
         };
-    
+
         const runCallback = (err) => {
-            callback();
+            callback(req, res, err);
             cleanupCallback();
         }
-    
+
         const cleanupLogging = () => {
             res.off("finish", log);
             res.off("close", log);
             res.off("error", log);
         };
-    
+
         const log = (err) => {
             if (err) {
                 logError(err);
@@ -48,7 +49,7 @@ const middleware = (callback) => {
             cleanupLogging();
         }
 
-        if (process.env.NODE_ENV !== 'production') {
+        if (isDev) {
             logger.timestamp();
             logRequest(req);
             res.on("finish", log);

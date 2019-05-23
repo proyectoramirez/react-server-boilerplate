@@ -1,6 +1,5 @@
 const shell = require('shelljs');
 const { exec } = require('child_process');
-const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 const compareVersions = require('compare-versions');

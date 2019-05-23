@@ -1,3 +1,4 @@
+const express = require("express");
 const webpack = require('webpack');
 const historyApiFallback = require("connect-history-api-fallback");
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -12,10 +13,14 @@ const middleware = webpackDevMiddleware(compiler, {
     stats: 'errors-only',
 });
 
-module.exports = (router) => {
+module.exports = () => {
+    const router = express.Router();
+    
     router.use(historyApiFallback({
         verbose: false
     }));
     router.use(middleware);
     router.use(webpackHotMiddleware(compiler));
+
+    return router;
 }

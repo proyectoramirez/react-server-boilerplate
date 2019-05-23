@@ -20,9 +20,11 @@
     "circular-dependency-plugin": "^5.0.2",
     "compare-versions": "^3.4.0",
     "connect-history-api-fallback": "^1.6.0",
+    "deep-freeze": "0.0.1",
     "express": "^4.16.4",
     "ip": "^1.1.5",
     "minimist": "^1.2.0",
+    "module-alias": "^2.2.0",
     "mongoose": "^5.4.17",
     "react": "^16.8.4",
     "react-app-polyfill": "^0.2.2",
@@ -47,5 +49,8 @@
     "webpack": "^4.29.6",
     "webpack-dev-middleware": "^3.6.1",
     "webpack-hot-middleware": "^2.24.3"
+  },
+  "_moduleAliases": {
+    "@": "server"
   }
 }
