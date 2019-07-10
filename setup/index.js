@@ -124,7 +124,9 @@ function installDepsCallback(error) {
     }
 
     deleteCurrentDir(() => {
-        if (clearRepo) {
+        if (!clearRepo) {
+            endProcess();
+        } else {
             interval = animateProgress('Initialising new repository');
             process.stdout.write('Initialising new repository');
             initGit(() => {
@@ -132,8 +134,6 @@ function installDepsCallback(error) {
                 endProcess();
             });
         }
-
-        endProcess();
     });
 }
 
