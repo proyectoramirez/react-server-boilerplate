@@ -25,7 +25,7 @@
     "ip": "^1.1.5",
     "minimist": "^1.2.0",
     "module-alias": "^2.2.0",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "react": "^16.8.4",
     "react-app-polyfill": "^0.2.2",
     "react-dom": "^16.8.4",
